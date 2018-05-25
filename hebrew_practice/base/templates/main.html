@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <!-- jQuery -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+    <!-- Drawer (http://git.blivesta.com/drawer/) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>-->
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endblock head %}
+</head>
+
+<body class="drawer drawer--left">
+
+<!-- Menu -->
+<header role="banner">
+    <button type="button" class="drawer-toggle drawer-hamburger" style="outline:none; width:25px;">
+        <span class="sr-only">toggle navigation</span>
+        <span class="drawer-hamburger-icon"></span>
+    </button>
+    <nav class="drawer-nav" role="navigation">
+        <ul class="drawer-menu">
+            <li class="title-menu"><a href="{% url 'index' %}" title="На главную">ניסיון עברית</a></li>
+            <li><a class="drawer-menu-item" href="{% url 'alphabet' %}" title="Случайные буквы алфавита">Алфавит</a></li>
+            <li><a class="drawer-menu-item" href="{% url 'random_number' %}" title="Случайное число">Числа</a></li>
+            <li><a class="drawer-menu-item" href="{% url 'random_time' %}" title="Случайное время">Время</a></li>
+            <li><a class="drawer-menu-item" href="{% url 'custom_number' %}" title="Перевести произвольное число на иврит">Перевод числа</a></li>
+            <li><a class="drawer-menu-item" href="{% url 'custom_time' %}" title="Перевести произвольное время на иврит">Перевод времени</a><br></li>
+        </ul>
+    </nav>
+</header>
+
+<!- Main -->
+<main role="main">
+{% block content %}
+
+{% block custom_input %}{% endblock %}
+
+{% block task %}
+<!-- Task -->
+<div id="task">
+    <span class="{% block task_class %}task-view-default{% endblock %}"></span>
+</div>
+{% endblock %}
+
+{% block gender_choice %}
+<!-- Gender choice -->
+<div class="gender-choice">
+    <label><input type="radio" name="gender" value="1" checked>&nbsp;Жен</label>&ensp;
+    <label><input type="radio" name="gender" value="0">&nbsp;Муж</label>
+</div>
+{% endblock %}
+
+{% block translate_button %}
+<!-- Translate button -->
+<div id="translate-btn">
+    <input class="btn btn-primary" type="button">
+</div>
+{% endblock %}
+
+{% block translation %}
+<!-- Translation -->
+<div id="translation">
+    <div class="translit"></div>
+    <div class="hebrew"></div>
+</div>
+{% endblock %}
+
+{% endblock content %}
+</main>
+
+<!-- Footer -->
+<footer>
+{% block footer %}{% endblock %}
+</footer>
+
+<!-- JavaScript -->
+{% block javascript %}
+<!-- jQuery -->
+<script src="{% static 'jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap -->
+<script src="{% static 'bootstrap/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<!-- Drawer (http://git.blivesta.com/drawer/) -->
+<script src="{% static 'drawer/iscroll.min.js' %}"></script>
+<script src="{% static 'drawer/drawer.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+{% endblock %}
+<script>
+/* Drawer menu init */
+$(document).ready(function() {
+  $('.drawer').drawer();
+});
+
+/* Gender choice */
+$('[name="gender"]').on('change', function() {
+    let gender = $(this).val();
+    changeGenderTranslation(gender);
+//    console.log(gender);
+});
+</script>
+
+</body>
+</html>

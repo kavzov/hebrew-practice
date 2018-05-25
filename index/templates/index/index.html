@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}Практика иврита{% endblock %}
+
+{% block content %}
+<div class="text-center"><img id="main-img" src="{% static 'img/alef.jpg' %}"></div>
+
+<div class="title-rus">Практика иврита</div>
+<div class="title-heb">ניסיון עברית</div>
+<div class="title-nav">
+    <a href="{% url 'alphabet' %}" title="Случайные буквы алфавита">Алфавит</a><br>
+    <a href="{% url 'random_number' %}" title="Случайное число">Числа</a><br>
+    <a href="{% url 'random_time' %}" title="Случайное время">Время</a><br>
+    <a href="{% url 'custom_number' %}" title="Перевести произвольное число на иврит">Перевод числа</a><br>
+    <a href="{% url 'custom_time' %}" title="Перевести произвольное время на иврит">Перевод времени</a><br>
+</div>
+{% endblock %}

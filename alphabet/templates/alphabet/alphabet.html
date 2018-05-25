@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}Алфавит{% endblock %}
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/alphabet.css' %}">
+{% endblock %}
+
+{% block task_class %}{% endblock %}
+{% block gender_choice %}{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/alphabet.js' %}"></script>
+{% endblock %}
